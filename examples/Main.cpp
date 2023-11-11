@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 
+#include "Kedarium/Core.hpp"
+
 // Constants
 const unsigned int WINDOW_WIDTH  = 800;
 const unsigned int WINDOW_HEIGHT = 600;
@@ -50,6 +52,10 @@ int main()
   GLclampf blue  = 0.f;
   GLclampf alpha = 1.f;
   glClearColor(red, green, blue, alpha);
+
+  kdr::Core::printEngineInfo();
+  std::cout << '\n';
+  kdr::Core::printVersionInfo();
 
   // Main Loop
   while (!glfwWindowShouldClose(window))
