@@ -68,7 +68,7 @@ namespace kdr
     {
       public:
         /**
-         * Constructs a Vertex Buffer Object and stores the provided vertex data.
+         * Constructs a Vertex Buffer Object.
          *
          * @param vertices An array of GLfloat representing vertex data.
          * @param size     The size in bytes of the provided vertex data.
@@ -110,7 +110,7 @@ namespace kdr
     {
       public:
         /**
-         * Constructs an Element Buffer Object and stores the provided element indices.
+         * Constructs an Element Buffer Object.
          *
          * @param indices An array of GLuint representing element indices.
          * @param size    The size in bytes of the provided element indices.
@@ -141,6 +141,57 @@ namespace kdr
         void Delete()
         { glDeleteBuffers(1, &this->ID); }
 
+      private:
+        GLuint ID;
+    };
+
+    /**
+     * Represents a Vertex Array Object (VAO) used to encapsulate the vertex attribute configuration in OpenGL.
+     */
+    class VAO
+    {
+      public:
+        /**
+         * Constructs a Vertex Array Object.
+         */
+        VAO()
+        { glGenVertexArrays(1, &this->ID); }
+
+        /**
+         * Retrieves the ID of the Vertex Array Object.
+         *
+         * @return The ID of the VAO.
+         */
+        const GLuint getID() const
+        { return this->ID; }
+
+        /**
+         * Links a VBO (Vertex Buffer Object) to the VAO, specifying attribute details.
+         *
+         * @param VBO     The VBO to link.
+         * @param layout  The attribute layout location.
+         * @param size    The number of components per attribute.
+         * @param type    The data type of each component.
+         * @param stride  The byte offset between consecutive vertex attributes.
+         * @param offset  The offset of the first component in the VBO.
+         */
+        void LinkAttrib(kdr::Graphics::VBO& VBO, GLuint layout, GLuint size, GLenum type, GLsizeiptr stride, const void* offset);
+        /**
+         * Binds the VAO for use in rendering.
+         */
+        void Bind()
+        { glBindVertexArray(this->ID); }
+        /**
+         * Unbinds the VAO.
+         */
+        void Unbind()
+        { glBindVertexArray(0); }
+        /**
+         * Deletes the VAO from memory.
+         */
+        void Delete()
+        { glDeleteVertexArrays(1, &this->ID); }
+  
       private:
         GLuint ID;
     };
