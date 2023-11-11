@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Kedarium/Core.hpp"
+#include "Kedarium/Color.hpp"
 
 // Constants
 const unsigned int WINDOW_WIDTH  = 800;
@@ -47,11 +48,13 @@ int main()
   }
 
   // Clear Color
-  GLclampf red   = 0.f;
-  GLclampf green = 0.f;
-  GLclampf blue  = 0.f;
-  GLclampf alpha = 1.f;
-  glClearColor(red, green, blue, alpha);
+  const kdr::Color::RGBA clearColor = kdr::Color::Black;
+  glClearColor(
+    clearColor.red,
+    clearColor.green,
+    clearColor.blue,
+    clearColor.alpha
+  );
 
   kdr::Core::printEngineInfo();
   std::cout << '\n';
@@ -61,6 +64,7 @@ int main()
   while (!glfwWindowShouldClose(window))
   {
     glfwPollEvents();
+    glClear(GL_COLOR_BUFFER_BIT);
     glfwSwapBuffers(window);
   }
 
