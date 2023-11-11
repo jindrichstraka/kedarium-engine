@@ -105,10 +105,25 @@ int main()
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+  glPointSize(3.f);
+
   // Main Loop
   while (!glfwWindowShouldClose(window))
   {
     glfwPollEvents();
+    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+    {
+      kdr::Graphics::usePointMode();
+    }
+    else if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
+    {
+      kdr::Graphics::useLineMode();
+    }
+    else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
+    {
+      kdr::Graphics::useFillMode();
+    }
+
     glClear(GL_COLOR_BUFFER_BIT);
     defaultShader.Use();
     glBindVertexArray(VAO);

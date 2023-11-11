@@ -12,6 +12,19 @@ namespace kdr
   namespace Graphics
   {
     /**
+     * Sets the rendering mode to display polygons as points.
+     */
+    void usePointMode();
+    /**
+     * Sets the rendering mode to display polygons as lines.
+     */
+    void useLineMode();
+    /**
+     * Sets the rendering mode to display polygons filled with color.
+     */
+    void useFillMode();
+
+    /**
      * Represents an abstraction of an OpenGL shader program.
      */
     class Shader

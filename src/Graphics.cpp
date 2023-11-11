@@ -1,5 +1,20 @@
 #include "Kedarium/Graphics.hpp"
 
+void kdr::Graphics::usePointMode()
+{
+  glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+}
+
+void kdr::Graphics::useLineMode()
+{
+  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+}
+
+void kdr::Graphics::useFillMode()
+{
+  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
 kdr::Graphics::Shader::Shader(const char* vertexSourcePath, const char* fragmentSourcePath)
 {
   // Shader Sources
