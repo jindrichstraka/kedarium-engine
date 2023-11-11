@@ -60,6 +60,48 @@ namespace kdr
       private:
         GLuint ID;
     };
+
+    /**
+     * Represents a Vertex Buffer Object (VBO) to manage vertex data in OpenGL.
+     */
+    class VBO
+    {
+      public:
+        /**
+         * Constructs a Vertex Buffer Object and stores the provided vertex data.
+         *
+         * @param vertices An array of GLfloat representing vertex data.
+         * @param size     The size in bytes of the provided vertex data.
+         */
+        VBO(const GLfloat vertices[], GLsizeiptr size);
+
+        /**
+         * Retrieves the ID of the Vertex Buffer Object.
+         *
+         * @return The ID of the VBO.
+         */
+        const GLuint getID() const
+        { return this->ID; }
+
+        /**
+         * Binds the VBO for use.
+         */
+        void Bind()
+        { glBindBuffer(GL_ARRAY_BUFFER, this->ID); }
+        /**
+         * Unbinds the VBO.
+         */
+        void Unbind()
+        { glBindBuffer(GL_ARRAY_BUFFER, 0); }
+        /**
+         * Deletes the VBO from memory.
+         */
+        void Delete()
+        { glDeleteBuffers(1, &this->ID); }
+
+      private:
+        GLuint ID;
+    };
   }
 }
 
