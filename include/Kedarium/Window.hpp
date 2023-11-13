@@ -6,6 +6,9 @@
 #include <iostream>
 #include <string>
 
+#include "Graphics.hpp"
+#include "Camera.hpp"
+
 namespace kdr
 {
   /**
@@ -71,6 +74,14 @@ namespace kdr
       virtual ~Window();
 
       /**
+       * Sets the currently bound camera for the window.
+       *
+       * @param camera A pointer to the Camera object to be bound.
+       */
+      void setBoundCamera(kdr::Camera* camera)
+      { this->boundCamera = camera; }
+
+      /**
        * Starts the main loop for the window.
        */
       void loop();
@@ -78,6 +89,16 @@ namespace kdr
        * Closes the window.
        */
       void close();
+      /**
+       * Binds a shader for use in the window.
+       *
+       * @param shader The shader to be bound for rendering.
+       */
+      void bindShader(kdr::Graphics::Shader& shader)
+      {
+        shader.Use();
+        this->usedShaderID = shader.getID();
+      }
 
     protected:
       /**
@@ -108,6 +129,9 @@ namespace kdr
 
       GLFWwindow* glfwWindow;
 
+      kdr::Camera* boundCamera  {NULL};
+      GLuint       usedShaderID {0};
+
       /**
        * Initializes GLFW for the window.
        */
@@ -128,6 +152,10 @@ namespace kdr
        * Sets up the window environment.
        */
       void _setup();
+      /**
+       * Updates the associated camera in the window.
+       */
+      void _updateCamera();
       /**
        * Updates the window state.
        */

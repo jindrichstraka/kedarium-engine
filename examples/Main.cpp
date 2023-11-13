@@ -1,8 +1,5 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <string>
 
@@ -10,6 +7,7 @@
 #include "Kedarium/Color.hpp"
 #include "Kedarium/Graphics.hpp"
 #include "Kedarium/Window.hpp"
+#include "Kedarium/Camera.hpp"
 
 // Constants
 const unsigned int WINDOW_WIDTH  = 800;
@@ -83,44 +81,30 @@ class MainWindow : public kdr::Window::Window
 
   void render()
   {
-    defaultShader.Use();
+    bindShader(defaultShader);
     VAO1.Bind();
-
-    GLuint modelLoc = glGetUniformLocation(defaultShader.getID(), "model");
-    GLuint viewLoc = glGetUniformLocation(defaultShader.getID(), "view");
-    GLuint projLoc = glGetUniformLocation(defaultShader.getID(), "proj");
-
-    glm::mat4 model {1.f};
-    glm::mat4 view {1.f};
-    glm::mat4 proj {1.f};
-
-    view = glm::translate(
-      view,
-      {0.f, 0.f, -3.f}
-    );
-    proj = glm::perspective(
-      glm::radians(60.f),
-      (float)WINDOW_WIDTH / WINDOW_HEIGHT,
-      0.1f,
-      100.f
-    );
-
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint), GL_UNSIGNED_INT, NULL);
   }
 };
 
 int main()
 {
+  // Camera
+  kdr::CameraProps cameraProps {
+    60.f,
+    (float)WINDOW_WIDTH / WINDOW_HEIGHT,
+    0.1f,
+    100.f
+  };
+  kdr::Camera mainCamera {cameraProps};
+
   // Window
   MainWindow mainWindow {
     WINDOW_WIDTH,
     WINDOW_HEIGHT,
     WINDOW_TITLE
   };
+  mainWindow.setBoundCamera(&mainCamera);
 
   // Clear Color
   const kdr::Color::RGBA clearColor = kdr::Color::Black;

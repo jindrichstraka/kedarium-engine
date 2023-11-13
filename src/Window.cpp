@@ -72,10 +72,19 @@ void kdr::Window::_setup()
   setup();
 }
 
+void kdr::Window::_updateCamera()
+{
+  if (boundCamera == NULL) return;
+
+  boundCamera->updateMatrix();
+  boundCamera->applyMatrix(usedShaderID);
+}
+
 void kdr::Window::_update()
 {
   glfwPollEvents();
   update();
+  _updateCamera();
 }
 
 void kdr::Window::_render()
