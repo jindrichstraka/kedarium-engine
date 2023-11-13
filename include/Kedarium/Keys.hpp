@@ -10,9 +10,15 @@ namespace kdr
    */
   enum Key
   {
-    C = GLFW_KEY_C,
-    V = GLFW_KEY_V,
+    A = GLFW_KEY_A,
     B = GLFW_KEY_B,
+    C = GLFW_KEY_C,
+    D = GLFW_KEY_D,
+    S = GLFW_KEY_S,
+    V = GLFW_KEY_V,
+    W = GLFW_KEY_W,
+    Space = GLFW_KEY_SPACE,
+    LeftShift = GLFW_KEY_LEFT_SHIFT,
   };
 
   namespace Keys

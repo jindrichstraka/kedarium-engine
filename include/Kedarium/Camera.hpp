@@ -6,6 +6,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Keys.hpp"
+
 namespace kdr
 {
   /**
@@ -70,6 +72,12 @@ namespace kdr
       { this->aspect = aspect; }
 
       /**
+       * Updates the camera's movement based on input received from a GLFW window.
+       *
+       * @param window The GLFW window context providing input for camera movement.
+       */
+      void updateMovement(GLFWwindow* window);
+      /**
        * Updates the camera matrix for transformations.
        */
       void updateMatrix();
@@ -86,7 +94,10 @@ namespace kdr
       float near   {0.1f};
       float far    {100.f};
 
-      glm::mat4 matrix {1.f};
+      glm::vec3 position {0.f, 0.f,  5.f};
+      glm::vec3 front    {0.f, 0.f, -1.f};
+      glm::vec3 up       {0.f, 1.f,  0.f};
+      glm::mat4 matrix   {1.f};
   };
 }
 
