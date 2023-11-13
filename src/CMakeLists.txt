@@ -5,6 +5,7 @@ add_library(
   Graphics.cpp
   Window.cpp
   Camera.cpp
+  Keys.cpp
 )
 
 # Include Directory

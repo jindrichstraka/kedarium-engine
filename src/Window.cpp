@@ -1,5 +1,12 @@
 #include "Kedarium/Window.hpp"
 
+void framebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+  kdr::Window* windowInstance = (kdr::Window*)glfwGetWindowUserPointer(window);
+  windowInstance->getBoundCamera()->setAspect((float)width / height);
+  glViewport(0, 0, width, height);
+}
+
 kdr::Window::~Window()
 {
   glfwDestroyWindow(glfwWindow);
@@ -62,6 +69,8 @@ void kdr::Window::_initialize()
     glfwTerminate();
   }
   glfwMakeContextCurrent(glfwWindow);
+  glfwSetFramebufferSizeCallback(glfwWindow, framebufferSizeCallback);
+  glfwSetWindowUserPointer(this->glfwWindow, this);
 
   _initializeGlew();
   _initializeOpenGLSettings();

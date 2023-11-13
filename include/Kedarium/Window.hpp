@@ -82,6 +82,14 @@ namespace kdr
       { this->boundCamera = camera; }
 
       /**
+       * Retrieves the currently bound camera for the window.
+       *
+       * @return A pointer to the bound Camera object.
+       */
+      kdr::Camera* getBoundCamera()
+      { return this->boundCamera; }
+
+      /**
        * Starts the main loop for the window.
        */
       void loop();
