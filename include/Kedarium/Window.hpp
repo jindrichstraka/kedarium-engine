@@ -104,6 +104,14 @@ namespace kdr
       { return this->deltaTime; }
 
       /**
+       * Maximizes the window to fill the screen.
+       */
+      void maximize();
+      /**
+       * Restores the window from a maximized state.
+       */
+      void unmaximize();
+      /**
        * Starts the main loop for the window.
        */
       void loop();
@@ -123,6 +131,9 @@ namespace kdr
       }
 
     protected:
+      bool fullscreenOn       {false};
+      bool pressingFullscreen {false};
+
       /**
        * Retrieves the GLFW window associated with the Window instance.
        *

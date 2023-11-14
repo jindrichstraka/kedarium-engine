@@ -75,6 +75,19 @@ class MainWindow : public kdr::Window::Window
       this->getBoundCamera()->setLocked(true);
     }
 
+    if (kdr::Keys::isPressed(this->getGlfwWindow(), kdr::Key::F))
+    {
+      if (!this->pressingFullscreen)
+      {
+        this->fullscreenOn ? this->unmaximize() : this->maximize();
+        this->pressingFullscreen = true;
+      }
+    }
+    else
+    {
+      this->pressingFullscreen = false;
+    }
+
     if (!this->getBoundCamera()->getLocked()) return;
 
     if (kdr::Keys::isPressed(this->getGlfwWindow(), kdr::Key::C))

@@ -12,6 +12,36 @@ kdr::Window::~Window()
   glfwDestroyWindow(glfwWindow);
 }
 
+void kdr::Window::maximize()
+{
+  const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+  glfwSetWindowMonitor(
+    glfwWindow,
+    glfwGetPrimaryMonitor(),
+    0,
+    0,
+    mode->width,
+    mode->height,
+    GLFW_DONT_CARE
+  );
+  fullscreenOn = true;
+}
+
+void kdr::Window::unmaximize()
+{
+  const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+  glfwSetWindowMonitor(
+    glfwWindow,
+    NULL,
+    mode->width  / 2 - 400,
+    mode->height / 2 - 300,
+    800,
+    600,
+    GLFW_DONT_CARE
+  );
+  fullscreenOn = false;
+}
+
 void kdr::Window::loop()
 {
   while (!glfwWindowShouldClose(glfwWindow))
