@@ -79,6 +79,12 @@ namespace kdr
        */
       void updateMovement(GLFWwindow* window, const float deltaTime);
       /**
+       * Updates the camera's rotation based on input received from a GLFW window.
+       *
+       * @param window The GLFW window context providing input for camera rotation.
+       */
+      void updateRotation(GLFWwindow* window);
+      /**
        * Updates the camera matrix for transformations.
        */
       void updateMatrix();
@@ -94,6 +100,12 @@ namespace kdr
       float aspect {1.f};
       float near   {0.1f};
       float far    {100.f};
+
+      float speed       {3.f};
+      float sensitivity {20.f};
+
+      float yaw   {-90.f};
+      float pitch {0.f};
 
       glm::vec3 position {0.f, 0.f,  5.f};
       glm::vec3 front    {0.f, 0.f, -1.f};

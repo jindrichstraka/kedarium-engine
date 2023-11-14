@@ -28,8 +28,38 @@ void kdr::Camera::updateMovement(GLFWwindow* window, const float deltaTime)
   }
 }
 
+void kdr::Camera::updateRotation(GLFWwindow* window)
+{
+  int windowWidth;
+  int windowHeight;
+  glfwGetWindowSize(window, &windowWidth, &windowHeight);
+
+  double mouseX;
+  double mouseY;
+  glfwGetCursorPos(window, &mouseX, &mouseY);
+
+  float deltaX = (float)(mouseX - (windowWidth / 2)) / windowWidth * sensitivity;
+  float deltaY = (float)(mouseY - (windowHeight / 2)) / windowHeight * sensitivity;
+
+  yaw += deltaX;
+  pitch -= deltaY;
+
+  if (pitch > 89.0f) pitch = 89.0f;
+  if (pitch < -89.0f) pitch = -89.0f;
+
+  yaw = std::remainderf(yaw, 360.f);
+
+  glfwSetCursorPos(window, (double)windowWidth / 2, (double)windowHeight / 2);
+}
+
 void kdr::Camera::updateMatrix()
 {
+  glm::vec3 tempFront { 0.f, 0.f, 0.f };
+  tempFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+  tempFront.y = sin(glm::radians(pitch));
+  tempFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+  front = glm::normalize(tempFront);
+
   glm::mat4 view {1.f};
   glm::mat4 proj {1.f};
 

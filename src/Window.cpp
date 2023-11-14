@@ -93,6 +93,7 @@ void kdr::Window::_updateCamera()
   if (boundCamera == NULL) return;
 
   boundCamera->updateMovement(glfwWindow, getDeltaTime());
+  boundCamera->updateRotation(glfwWindow);
   boundCamera->updateMatrix();
   boundCamera->applyMatrix(usedShaderID);
 }
