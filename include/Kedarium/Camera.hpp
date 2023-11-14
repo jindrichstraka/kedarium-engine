@@ -74,9 +74,10 @@ namespace kdr
       /**
        * Updates the camera's movement based on input received from a GLFW window.
        *
-       * @param window The GLFW window context providing input for camera movement.
+       * @param window      The GLFW window context providing input for camera movement.
+       * @param deltaTime   The time elapsed between the current frame and the previous frame.
        */
-      void updateMovement(GLFWwindow* window);
+      void updateMovement(GLFWwindow* window, const float deltaTime);
       /**
        * Updates the camera matrix for transformations.
        */

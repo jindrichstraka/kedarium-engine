@@ -88,6 +88,20 @@ namespace kdr
        */
       kdr::Camera* getBoundCamera()
       { return this->boundCamera; }
+      /**
+       * Retrieves the current time in seconds since the GLFW initialization.
+       *
+       * @return The current time in seconds.
+       */
+      const float getTime() const
+      { return glfwGetTime(); }
+      /**
+       * Retrieves the time elapsed between the current frame and the previous frame.
+       *
+       * @return The time elapsed in seconds.
+       */
+      const float getDeltaTime() const
+      { return this->deltaTime; }
 
       /**
        * Starts the main loop for the window.
@@ -114,7 +128,7 @@ namespace kdr
        *
        * @return A pointer to the GLFW window.
        */
-      GLFWwindow* getGlfwWindow()
+      GLFWwindow* getGlfwWindow() const
       { return this->glfwWindow; }
 
       /**
@@ -140,6 +154,9 @@ namespace kdr
       kdr::Camera* boundCamera  {NULL};
       GLuint       usedShaderID {0};
 
+      float deltaTime {0.f};
+      float lastTime  {0.f};
+
       /**
        * Initializes GLFW for the window.
        */
@@ -160,6 +177,10 @@ namespace kdr
        * Sets up the window environment.
        */
       void _setup();
+      /**
+       * Updates the time difference between the current and previous frames.
+       */
+      void _updateDeltaTime();
       /**
        * Updates the associated camera in the window.
        */

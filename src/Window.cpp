@@ -70,7 +70,7 @@ void kdr::Window::_initialize()
   }
   glfwMakeContextCurrent(glfwWindow);
   glfwSetFramebufferSizeCallback(glfwWindow, framebufferSizeCallback);
-  glfwSetWindowUserPointer(this->glfwWindow, this);
+  glfwSetWindowUserPointer(glfwWindow, this);
 
   _initializeGlew();
   _initializeOpenGLSettings();
@@ -81,11 +81,18 @@ void kdr::Window::_setup()
   setup();
 }
 
+void kdr::Window::_updateDeltaTime()
+{
+  float currentTime = (float)glfwGetTime();
+  deltaTime = currentTime - lastTime;
+  lastTime = currentTime;
+}
+
 void kdr::Window::_updateCamera()
 {
   if (boundCamera == NULL) return;
 
-  boundCamera->updateMovement(this->glfwWindow);
+  boundCamera->updateMovement(glfwWindow, getDeltaTime());
   boundCamera->updateMatrix();
   boundCamera->applyMatrix(usedShaderID);
 }
@@ -93,8 +100,9 @@ void kdr::Window::_updateCamera()
 void kdr::Window::_update()
 {
   glfwPollEvents();
-  update();
+  _updateDeltaTime();
   _updateCamera();
+  update();
 }
 
 void kdr::Window::_render()
