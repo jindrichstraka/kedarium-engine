@@ -154,8 +154,8 @@ namespace kdr
       kdr::Camera* boundCamera  {NULL};
       GLuint       usedShaderID {0};
 
-      float deltaTime {0.f};
-      float lastTime  {0.f};
+      float deltaTime   {0.f};
+      float lastTime    {0.f};
 
       /**
        * Initializes GLFW for the window.

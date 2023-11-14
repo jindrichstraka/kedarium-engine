@@ -2,6 +2,13 @@
 
 void kdr::Camera::updateMovement(GLFWwindow* window, const float deltaTime)
 {
+  if (!locked)
+  {
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    return;
+  }
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
   if (kdr::Keys::isPressed(window, kdr::Key::W))
   {
     position += 3.f * deltaTime * front;
@@ -30,6 +37,8 @@ void kdr::Camera::updateMovement(GLFWwindow* window, const float deltaTime)
 
 void kdr::Camera::updateRotation(GLFWwindow* window)
 {
+  if (!locked) return;
+
   int windowWidth;
   int windowHeight;
   glfwGetWindowSize(window, &windowWidth, &windowHeight);

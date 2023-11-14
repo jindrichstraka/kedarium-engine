@@ -64,12 +64,27 @@ namespace kdr
       {}
 
       /**
+       * Retrieves the lock state of the camera's movement.
+       *
+       * @return True if the camera's movement is locked; false if unlocked.
+       */
+      const bool getLocked() const
+      { return this->locked; }
+
+      /**
        * Sets the aspect ratio of the camera.
        *
        * @param aspect New aspect ratio for the camera.
        */
       void setAspect(const float aspect)
       { this->aspect = aspect; }
+      /**
+       * Sets the lock state of the camera's movement.
+       *
+       * @param locked True to lock the camera's movement; false to unlock.
+       */
+      void setLocked(const bool locked)
+      { this->locked = locked; }
 
       /**
        * Updates the camera's movement based on input received from a GLFW window.
@@ -102,7 +117,8 @@ namespace kdr
       float far    {100.f};
 
       float speed       {3.f};
-      float sensitivity {20.f};
+      float sensitivity {24.f};
+      bool  locked      {false};
 
       float yaw   {-90.f};
       float pitch {0.f};
